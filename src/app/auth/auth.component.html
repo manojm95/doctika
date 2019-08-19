@@ -1,0 +1,14 @@
+<div class="headerPage">
+    <h1>DOCTIKA</h1>
+    <nav>
+      <div class="row">
+        <ul class="main-nav1">
+          <li><a [routerLink]="['/upload']">Home</a></li>
+          <li><a [routerLink]="['signup']">Register</a></li>
+          <li><a (click)="onSignIn()">SignIn</a></li>
+  
+        </ul>
+      </div>
+    </nav>
+    <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>

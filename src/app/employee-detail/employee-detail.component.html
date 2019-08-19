@@ -1,0 +1,9 @@
+<div *ngIf="employee">
+        <div>
+          <label>Full Name: </label> {{employee.name}}
+        </div>
+        <div *ngIf="employee.empId > 0">
+          <label>Employee ID: </label> {{employee.empId}}
+        </div>
+        <hr/>
+      </div>

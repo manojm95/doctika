@@ -1,0 +1,37 @@
+<div class="container">
+        <nav style="padding-top: 15px; padding-bottom: 15px;" class="navbar navbar-expand-md">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <div class="navbar-header">
+                    <a style="color: black; font-weight: 800; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; " routerLink="/" class="navbar-brand">DOCTIKA</a>
+                </div>
+                <ul class="navbar-nav mr-auto main-nav1">
+                    <li class="nav-item" routerLinkActive="active"><a  [ngStyle]="{'font-weight': headerMsg==='Upload Document' ? 'bold' : 'normal', 'color': headerMsg==='Upload Document' ? '#212F3C' : '#000' }"  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: black;" class="nav-link"
+                            [routerLink]="['/upload']">Upload</a></li>
+                    <li class="nav-item" routerLinkActive="active"><a [ngStyle]="{'font-weight': headerMsg==='Upload Document' ? 'normal': 'bold', 'color': headerMsg==='Upload Document' ? '#000' : '#212F3C'}" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: black;" class="nav-link"
+                            [routerLink]="['/search']">Search</a></li>
+                </ul>
+            </div>
+            <!-- <div class="mx-auto order-0">
+                <a class="navbar-brand mx-auto" href="#">Navbar 2</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div> -->
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a style="color: black; font-weight: 600; cursor:pointer;" class="nav-link" (click)="onLogout()" *ngIf="isAuthenticated()">LOGOUT</a></li>
+                    <ng-template [ngIf]="!isAuthenticated()">
+                        <li class="nav-item" routerLinkActive="active"><a class="nav-link" [routerLink]="['/signup']">SignUp</a></li>
+                        <li class="nav-item" routerLinkActive="active"><a class="nav-link" [routerLink]="['/signin']">SignIn</a></li>
+                    </ng-template>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div style="background-color: #212F3C; height: 120px; margin-bottom: 20px">
+        <div style="color: white; padding-top: 30px"  class="container">
+            <h4>{{headerMsg}}</h4>
+            <p>{{headerContent}}</p>
+        </div> 
+    </div>
+    

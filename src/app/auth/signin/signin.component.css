@@ -1,0 +1,75 @@
+.header-btn-box {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    padding: 3em;
+    /*we will not use responsive fluid grid bcos we gonna keep this absolute to make it stay in center both vertically and hoizontally-landscape*/
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    /*translates half of IT'S width and height to top and left*/
+    transform: translate(-50%,-50%);
+ 
+ }
+
+ h3 {
+     margin: 0px;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     font-weight: lighter;
+     color: white;
+     font-size: 35px;
+     text-align: center;
+ }
+
+ h2 {
+    /* other styles goes here... */
+    font-size: 14px;
+    margin: 0px;
+    text-align: center;
+    color: #D5DBDB;
+    font-weight: lighter;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+ input {
+     display: block;
+     width: 320px;
+     height: 40px;
+     background: rgba(153, 163, 164, .2);
+     outline: none;
+     border: 1px solid rgba(0,0,0,.5);
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     font-weight: lighter;
+     font-size: 14px;
+     margin-bottom: 10px;
+     padding-left: 10px;
+     border-radius: 5px;
+     color: white;
+ }
+
+ button {
+     width: 320px;
+     height: 40px;
+     font-size: 15px;
+     background:#27AE60;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+     font-weight: lighter;
+     color: #fff;
+    border: 0px;
+    border-radius: 5px;
+    display: block;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

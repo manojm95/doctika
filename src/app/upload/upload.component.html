@@ -1,0 +1,18 @@
+<app-header [headerMsg]="'Upload Document'" [headerContent]="'PDF, .doc, .ppt and other MS suite documents works good.'"></app-header>
+<div class="container">
+<!-- <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+        <p>Please select the file for upload!</p>
+        <div class="col-sm-5 form-group">
+            <input type="text" id="name" placeholder="Full Name" formControlName="name">
+            <input type="file" (change)="saveFileName($event)"/>
+          </div>    
+</form> -->
+<input (change)="saveName($event)" style="padding:5px; margin-right: 20px; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="name" placeholder="Full Name">
+<input (change)="saveId($event)" style="padding:5px; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="empId" placeholder="Emp ID">
+<br/>
+<p style="margin-top: 20px">Please select the file for upload!</p>
+<input type="file" (change)="saveFileName($event)"/>
+<button type="submit" (click)="onSubmit()"  style="font-size: 12px; padding: 10px 20px; background-color: #27AE60; color: #fff " mdbBtn type="button" mdbWavesEffect>Upload</button>
+<p *ngIf="isComplete" style="margin-top: 20px; color: #27AE60">Upload is complete and contents are indexed!</p>
+
+</div>

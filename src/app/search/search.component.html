@@ -1,0 +1,17 @@
+<app-header [headerMsg]="'Search contents'" [headerContent]="'Start searching with the power of ElasticSearch!'"></app-header>
+<div class="container">
+<div id="outer">  
+<div  id="inner" style="margin-top:20px;">
+        <h5>Enter skills to filter eleigible candidates!</h5>
+        <input style="width: 50%; padding:5px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" type="text" (keyup)="search($event)" placeholder="start typing..." class="input">
+       
+        <div *ngFor="let emp of employees" style="margin-top:20px">
+          <app-employee-detail [employee]='emp._source'></app-employee-detail>
+        </div>
+       
+        <div *ngIf="employees?.length < 1" style="margin-top:20px">
+          <p>No Results!</p>
+        </div>
+      </div>
+    </div>
+</div>
