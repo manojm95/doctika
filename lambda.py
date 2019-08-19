@@ -81,8 +81,7 @@ def indexDocElement(esClient, fileName, fileContent):
 def lambda_handler(event, context):
     print('MMMMM',event)
     # TODO implement
-    baseUrl= "https://tika-s3-poc-test.s3-us-west-1.amazonaws.com/"
-    restUrl = "http://13.56.241.136:5000/user/"
+    restUrl = "http://XX.XX.XXX.XXX:5000/user/"
     key = event['Records'][0]['s3']['object']['key']
     finalUrl = restUrl + key
     print('The value of object is {}'.format(finalUrl))
