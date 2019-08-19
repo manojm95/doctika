@@ -95,7 +95,7 @@ export class ElasticsearchService {
           }
         }
       },
-      '_source': ['name', 'empId']
+      '_source': ['name', 'empId','objectUrl']
     });
   }
 

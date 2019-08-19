@@ -4,6 +4,7 @@ import { ElasticsearchService } from '../elasticsearch.service';
 export interface Employee {
   name: string;
   empId: string;
+  url: string;
 }
 
 export interface EmployeeSource {
@@ -17,8 +18,10 @@ export interface EmployeeSource {
 })
 export class SearchComponent implements OnInit {
 
-  private static readonly INDEX = 'thz_index';
+  private static readonly INDEX = 'thz_indexv1';
   private static readonly TYPE = '_doc';
+
+  headElements: string[] = ['#','Emp Name', 'Emp Id', 'Resume']
   
   employees: EmployeeSource[];
 
@@ -43,7 +46,8 @@ export class SearchComponent implements OnInit {
         'content', this.queryText).then(
           response => {
             this.employees = response.hits.hits;
-            console.log(response);
+            
+            console.log('MMMMM',this.employees);
           }, error => {
             console.error(error);
           }).then(() => {
