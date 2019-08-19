@@ -1,18 +1,3 @@
-# from tika import parser
-# import os
-# return {
-#         'statusCode': 200,
-#         'body': json.dumps('Hello from Lambda!')
-#     }
-
-# file = os.path.abspath("C:/Users/manraju/Desktop/iest.pdf")
-
-# # Parse data from file
-# file_data = parser.from_file(file)
-# # Get files text content
-# text = file_data['content']
-# print(text)
-
 import json
 import urllib.request
 from elasticsearch import Elasticsearch, RequestsHttpConnection
@@ -34,8 +19,10 @@ request_body = {
 
 	    'mappings': {
 	            'properties': {
-	                'filename': {'type': 'text'},
-	                'fileContent': {'type': 'text'},
+	                'name': {'type': 'text'},
+	                'empId': {'type': 'text'},
+	                'content': {'type': 'text'},
+	                'objectUrl': {'type': 'text'},
 	            }}
 }
 
@@ -57,21 +44,23 @@ def connectES(esEndPoint):
 def createIndex(esClient):
     print('esclient MMMM is {}'.format(esClient))
     try:
-        res = esClient.indices.exists('talent-hub')
+        res = esClient.indices.exists('thz_indexv1')
         print("Index Exists ... {}".format(res))
         if res is False:
-            esClient.indices.create('talent-hub', body=request_body)
+            esClient.indices.create('thz_indexv1', body=request_body)
             return 1
     except Exception as E:
-        print("Unable to Create Index {0}".format("talent-hub"))
+        print("Unable to Create Index {0}".format("thz_indexv1"))
         print(E)
         exit(4)
 
-def indexDocElement(esClient, fileName, fileContent):
+def indexDocElement(esClient, name, empId, content, objectUrl):
     try:
-        retval = esClient.index(index='talent-hub', body={
-            'fileName': fileName,
-            'fileContent': fileContent,
+        retval = esClient.index(index='thz_indexv1', body={
+            'name': name.replace(r"+", " "),
+            'content': content,
+            'empId': empId,
+            'objectUrl': objectUrl
         })
     except Exception as E:
         print("Doc not indexed")
@@ -81,19 +70,21 @@ def indexDocElement(esClient, fileName, fileContent):
 def lambda_handler(event, context):
     print('MMMMM',event)
     # TODO implement
-    restUrl = "http://XX.XX.XXX.XXX:5000/user/"
+    baseUrl= "https://XXX/"
+    restUrl = "http://yyy:5000/user/"
     key = event['Records'][0]['s3']['object']['key']
+    vals = key.split('_')
     finalUrl = restUrl + key
     print('The value of object is {}'.format(finalUrl))
     contents = urllib.request.urlopen(finalUrl).read()
     print(contents)
     strContents = contents.decode("utf-8") 
-    strContents = strContents.replace(r"\n", "")
+    strContents = strContents.replace(r"\n", "").replace(r"\t", "").replace(r"\u00b7", "").replace(r"\u00a0", "").replace(r"\u2019s", "").replace('\u201c','').replace('\u201d','')
     print('string contents MMMM is {}'.format(strContents))
-    esClient = connectES("search-tika-es-bn3u2vyptgvxdnjzw2ieewnllq.us-west-1.es.amazonaws.com")
+    esClient = connectES("xxx")#without http://
     createIndex(esClient)
     try:
-        indexDocElement(esClient,key,strContents)
+        indexDocElement(esClient,vals[1],vals[2],strContents,baseUrl+key)
     except Exception as e:
         print('There is a error MMMM')
         print(e)
