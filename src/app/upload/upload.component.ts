@@ -42,7 +42,7 @@ export class UploadComponent implements OnInit {
     console.log("The recorded values are ",this.name + "  " + this.empId + " " + this.filePath + " " + this.fileType )
     console.log("nnnnnnnn", this.fileContent["type"])
     this.isComplete = false;
-    const uploadUrl = await axios.post('https://cyukkpb0e6.execute-api.us-west-1.amazonaws.com/dev/preurl',{
+    const uploadUrl = await axios.post('https://mmmmm',{
       fileName: this.fileContent["name"],
       name: this.name,
       empId: this.empId
