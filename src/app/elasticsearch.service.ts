@@ -17,14 +17,14 @@ export class ElasticsearchService {
  
   private connect() {
     this.client = new Client({
-      host: 'https://search-tika-es-bn3u2vyptgvxdnjzw2ieewnllq.us-west-1.es.amazonaws.com',
+      host: 'https://mmmmm',
       log: 'trace'
     });
   }
  
   private _connect() {
     this.client = new elasticsearch.Client({
-      host: 'https://search-tika-es-bn3u2vyptgvxdnjzw2ieewnllq.us-west-1.es.amazonaws.com',
+      host: 'https://mmmmm',
       log: 'trace'
     });
   }
