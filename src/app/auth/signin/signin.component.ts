@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ElasticsearchService } from 'src/app/elasticsearch.service';
 const rp = (/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/);
@@ -15,7 +16,7 @@ export class SigninComponent implements OnInit {
   isConnected: boolean;
 
 
-  constructor(private es: ElasticsearchService) { }
+  constructor(private es: ElasticsearchService, private router: Router) { }
 
   ngOnInit() {
     this.signinForm = new FormGroup({
@@ -35,6 +36,10 @@ export class SigninComponent implements OnInit {
     console.log('Error');
   });
 
+  }
+
+  login() {
+    this.router.navigate(["/upload"])
   }
 
   passwordRegex(control: FormControl):{[s:string]:boolean}{

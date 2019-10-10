@@ -2,13 +2,17 @@
         <nav style="padding-top: 15px; padding-bottom: 15px;" class="navbar navbar-expand-md">
             <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
                 <div class="navbar-header">
-                    <a style="color: black; font-weight: 800; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; " routerLink="/" class="navbar-brand">DOCTIKA</a>
+                    <a style="color: black; font-weight: 800; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; " routerLink="/upload" class="navbar-brand">DOCTIKA</a>
                 </div>
                 <ul class="navbar-nav mr-auto main-nav1">
                     <li class="nav-item" routerLinkActive="active"><a  [ngStyle]="{'font-weight': headerMsg==='Upload Document' ? 'bold' : 'normal', 'color': headerMsg==='Upload Document' ? '#212F3C' : '#000' }"  style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: black;" class="nav-link"
                             [routerLink]="['/upload']">Upload</a></li>
                     <li class="nav-item" routerLinkActive="active"><a [ngStyle]="{'font-weight': headerMsg==='Upload Document' ? 'normal': 'bold', 'color': headerMsg==='Upload Document' ? '#000' : '#212F3C'}" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: black;" class="nav-link"
                             [routerLink]="['/search']">Search</a></li>
+                            <li class="nav-item" routerLinkActive="active"><a [ngStyle]="{'font-weight': headerMsg==='Upload Document' ? 'normal': 'bold', 'color': headerMsg==='Upload Document' ? '#000' : '#212F3C'}" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: black;" class="nav-link"
+                                [routerLink]="['/uploadfiles']">OCR</a></li>
+                                <li class="nav-item" routerLinkActive="active"><a [ngStyle]="{'font-weight': headerMsg==='Upload Document' ? 'normal': 'bold', 'color': headerMsg==='Upload Document' ? '#000' : '#212F3C'}" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: black;" class="nav-link"
+                                    [routerLink]="['/searchOcr']">OCR Data</a></li>
                 </ul>
             </div>
             <!-- <div class="mx-auto order-0">
@@ -19,7 +23,8 @@
             </div> -->
             <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a style="color: black; font-weight: 600; cursor:pointer;" class="nav-link" (click)="onLogout()" *ngIf="isAuthenticated()">LOGOUT</a></li>
+                        <li class="nav-item"><a style="color: #34495E; font-weight: 600; cursor:pointer;padding: 0px" class="nav-link" (click)="onLogout()" *ngIf="isAuthenticated()">{{userName}}</a></li>
+                    <li class="nav-item"><a style="color: black; cursor:pointer;padding: 0px" class="nav-link" (click)="onLogout()" *ngIf="isAuthenticated()">{{logout}}</a></li>
                     <ng-template [ngIf]="!isAuthenticated()">
                         <li class="nav-item" routerLinkActive="active"><a class="nav-link" [routerLink]="['/signup']">SignUp</a></li>
                         <li class="nav-item" routerLinkActive="active"><a class="nav-link" [routerLink]="['/signin']">SignIn</a></li>

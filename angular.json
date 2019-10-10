@@ -25,9 +25,15 @@
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/jQuery-QueryBuilder/dist/css/query-builder.default.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js",
+              "node_modules/jQuery-QueryBuilder/dist/js/query-builder.standalone.js",
+              "src/app/vendor/query-builder-elasticsearch.js"
+            ]
           },
           "configurations": {
             "production": {

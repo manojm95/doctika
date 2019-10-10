@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -11,10 +12,14 @@ export class HeaderComponent implements OnInit {
 
   @Input() headerMsg: string;
   @Input() headerContent: string;
+  
+  userName: string;
+  logout: string = "(logout)";
 
   constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.userName = "hi guest!" 
   }
 
   isAuthenticated(): boolean{
@@ -22,7 +27,6 @@ export class HeaderComponent implements OnInit {
   }
 
   onLogout(){
-    this.router.navigate(["/auth/signin"]);
   }
 
   onSaveData(){

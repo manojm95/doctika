@@ -1,0 +1,37 @@
+<app-header [headerMsg]="'Search contents'" [headerContent]="'Start searching with the power of ElasticSearch!'"></app-header>
+<div class="container">
+<div id="outer">  
+<div  id="inner" style="margin-top:20px;">
+        <h5>Enter the ID detail and click Submit</h5>
+        <input style="width: 50%; padding:5px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" type="text" (change)="search($event)" placeholder="enter id..." class="input">
+       
+        <!-- <div *ngFor="let emp of employees" style="margin-top:20px">
+          <app-employee-detail [employee]='emp._source'></app-employee-detail>
+        </div> -->
+        <table *ngIf="finalArr !== undefined && finalArr.length > 0 " mdbTable style="margin-top:20px">
+                <thead *ngIf="finalArr.length > 0" class="black white-text">
+                  <tr>
+                    <!-- <th *ngFor="let head of headElements" scope="col">{{head}} </th> -->
+                    <th scope="col">{{headElements[0]}} </th>
+                    <th style="text-align:left; padding-left: 50px" scope="col">{{headElements[1]}} </th>
+                    <th style="text-align:left; padding-left: 50px" scope="col">{{headElements[2]}} </th>
+                    <!-- <th scope="col">{{headElements[3]}} </th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr mdbTableCol *ngFor="let emp of finalArr; let i = index;">
+                    <th scope="row">{{i + 1}}</th>
+                    <td style="text-align:left; padding-left: 50px">{{emp[0]}}</td>
+                    <td style="text-align:left; padding-left: 50px">{{emp[1]}}</td>
+                    <!-- <td><a style="padding: 5px 10px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 12px" (click)="downloadObject(emp._source.objectUrl)" class="btn btn-primary">
+                            Download
+                          </a></td> -->
+                  </tr>
+                </tbody>
+              </table>
+        <div *ngIf="finalArr?.length < 1" style="margin-top:20px">
+                <button type="submit" (click)="onSubmit()"  style="font-size: 12px; padding: 10px 20px; background-color: #27AE60; color: #fff " mdbBtn type="button" mdbWavesEffect>Submit</button>
+        </div>
+      </div>
+    </div>
+</div>

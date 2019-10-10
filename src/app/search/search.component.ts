@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ElasticsearchService } from '../elasticsearch.service';
+import axios from 'axios';
 
 export interface Employee {
   name: string;
@@ -56,6 +57,19 @@ export class SearchComponent implements OnInit {
     }
  
     this.lastKeypress = $event.timeStamp;
+  }
+
+  async downloadObject(objUrl){
+    let name = objUrl.split("/").pop()
+    const uploadUrl = await axios.post('https://d7vgjq4jy3.execute-api.us-east-1.amazonaws.com/dev/preurl',{
+      fileName: name,
+      name: "getRequest",
+      empId: "dummy"
+
+    })
+    let finalUrl= uploadUrl['data']['body']['url'];
+    var win = window.open(finalUrl, '_blank');
+    win.focus();
   }
 
 }

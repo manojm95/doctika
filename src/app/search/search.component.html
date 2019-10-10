@@ -11,15 +11,19 @@
         <table *ngIf="employees !== undefined && employees.length > 0 " mdbTable style="margin-top:20px">
                 <thead *ngIf="employees.length > 0" class="black white-text">
                   <tr>
-                    <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+                    <!-- <th *ngFor="let head of headElements" scope="col">{{head}} </th> -->
+                    <th scope="col">{{headElements[0]}} </th>
+                    <th style="text-align:left; padding-left: 50px" scope="col">{{headElements[1]}} </th>
+                    <th scope="col">{{headElements[2]}} </th>
+                    <th scope="col">{{headElements[3]}} </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr mdbTableCol *ngFor="let emp of employees; let i = index;">
                     <th scope="row">{{i + 1}}</th>
-                    <td>{{emp._source.name}}</td>
+                    <td style="text-align:left; padding-left: 50px">{{emp._source.name}}</td>
                     <td>{{emp._source.empId}}</td>
-                    <td><a style="padding: 5px 10px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 12px" href={{emp._source.objectUrl}} class="btn btn-primary">
+                    <td><a style="padding: 5px 10px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 12px" (click)="downloadObject(emp._source.objectUrl)" class="btn btn-primary">
                             Download
                           </a></td>
                   </tr>

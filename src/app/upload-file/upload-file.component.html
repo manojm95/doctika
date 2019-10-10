@@ -1,0 +1,20 @@
+<app-header [headerMsg]="'Upload/Drag Files'" [headerContent]="'Import the PDFs for content extraction'"></app-header>
+
+<div class="container">
+    <p style="margin-top: 20px; margin-left: 10%">Please drop or select the files for upload</p>
+
+    <div style="margin-top: 20px; margin-left: 10%">
+    <input style="margin-top: 20px; margin-left: 10%" (change)="saveId($event)" style="padding:5px; margin-right: 20px; font-size: 14px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" id="name" placeholder="uid...">
+    </div>
+<div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+  </div>
+    <div  class="files-list" *ngFor="let file of files;let i=index">
+      <p>{{ file }}</p>
+      <button class="delete-file" (click)="deleteAttachment(i)">
+        <img src="../../assets/Recycle_Bin_Full (1).png">
+      </button>
+    </div>
+    <button type="submit" (click)="onSubmit()"  style="font-size: 12px; padding: 10px 20px; background-color: #27AE60; color: #fff; margin-left: 10% " mdbBtn type="button" mdbWavesEffect>Upload</button>
+    <p *ngIf="isComplete" style="margin-top: 20px; color: #27AE60">Upload is complete and contents are indexed!</p>
+  </div>

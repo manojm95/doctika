@@ -31,18 +31,19 @@ export class UploadComponent implements OnInit {
   }
 
   saveFileName(event) {
-    console.log('MMMMMM')
+    console.log('MMMMMM', event.target.files[0]);
     console.log('The vale is ', event.target.files[0]);
     this.filePath = event.target.files[0].name;
     this.fileType = event.target.files[0].type;
     this.fileContent = event.target.files[0];
+
   }
 
   async onSubmit(){
     console.log("The recorded values are ",this.name + "  " + this.empId + " " + this.filePath + " " + this.fileType )
     console.log("nnnnnnnn", this.fileContent["type"])
     this.isComplete = false;
-    const uploadUrl = await axios.post('https://cyukkpb0e6.execute-api.us-west-1.amazonaws.com/dev/preurl',{
+    const uploadUrl = await axios.post('https://d7vgjq4jy3.execute-api.us-east-1.amazonaws.com/dev/preurl',{
       fileName: this.fileContent["name"],
       name: this.name,
       empId: this.empId
@@ -52,7 +53,7 @@ export class UploadComponent implements OnInit {
     let res = await axios.put(uploadUrl.data["body"]["url"],this.fileContent, {
       headers: {
         'Content-Type' : this.fileContent["type"],
-        "x-amz-tagging": "myrealtag=tagvalue"
+        // "x-amz-tagging": "myrealtag=tagvalue"
       }
     })
     this.isComplete = true;

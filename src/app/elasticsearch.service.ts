@@ -17,14 +17,14 @@ export class ElasticsearchService {
  
   private connect() {
     this.client = new Client({
-      host: 'https://search-tika-es-bn3u2vyptgvxdnjzw2ieewnllq.us-west-1.es.amazonaws.com',
+      host: 'https://search-trlm-tika-poc-ikhcw3ie6kko6jzvot7nxwzdzq.us-east-1.es.amazonaws.com',
       log: 'trace'
     });
   }
  
   private _connect() {
     this.client = new elasticsearch.Client({
-      host: 'https://search-tika-es-bn3u2vyptgvxdnjzw2ieewnllq.us-west-1.es.amazonaws.com',
+      host: 'https://search-trlm-tika-poc-ikhcw3ie6kko6jzvot7nxwzdzq.us-east-1.es.amazonaws.com',
       log: 'trace'
     });
   }
@@ -87,7 +87,7 @@ export class ElasticsearchService {
     return this.client.search({
       index: _index,
       type: _type,
-      filterPath: ['hits.hits._source', 'hits.total', '_scroll_id'],
+      // filterPath: ['hits.hits._source', 'hits.total', '_scroll_id'],
       body: {
         'query': {
           'match_phrase_prefix': {
@@ -95,9 +95,26 @@ export class ElasticsearchService {
           }
         }
       },
+      //explain: true,
       '_source': ['name', 'empId','objectUrl']
     });
   }
 
-
+  
+  fullTextSearchContent(_index: any, _type:any, _field:any, _queryText: any): any {
+    return this.client.search({
+      index: _index,
+      type: _type,
+      // filterPath: ['hits.hits._source', 'hits.total', '_scroll_id'],
+      body: {
+        'query': {
+          'match': {
+            [_field]: _queryText,
+          }
+        }
+      },
+      //explain: true,
+      '_source': ['name', 'empId','objectUrl','content']
+    });
+  }
 }

@@ -15,16 +15,23 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ElasticsearchService } from './elasticsearch.service';
 import { SearchComponent } from './search/search.component';
 import { EmployeeDetailComponent } from './employee-detail/employee-detail.component';
-
+import { UploadFileComponent } from './upload-file/upload-file.component';
+import { DragDropDirective } from './drag-drop.directive';
+import { OcrSearchComponent } from './ocr-search/ocr-search.component';
+import { QbuildComponent } from './qbuild/qbuild.component';
 
 
 const routes : Routes  = [
-  {path: '', redirectTo: '/auth', pathMatch:'full'},
   {path: 'auth', component: AuthComponent, children:[
     {path: 'signin', component: SigninComponent},
   ]},
-  {path: 'upload', component: UploadComponent},
-  {path: 'search', component: SearchComponent}
+  // {path: 'upload', component: UploadComponent},
+  {path: 'upload', component: QbuildComponent},
+  {path: 'search', component: SearchComponent},
+  {path: 'uploadfiles', component: UploadFileComponent},
+  {path: 'searchOcr', component: OcrSearchComponent},
+  {path: 'download', component: QbuildComponent},
+
 ]
 
 @NgModule({
@@ -35,7 +42,11 @@ const routes : Routes  = [
     UploadComponent,
     HeaderComponent,
     SearchComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    UploadFileComponent,
+    DragDropDirective,
+    OcrSearchComponent,
+    QbuildComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +54,7 @@ const routes : Routes  = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    MDBBootstrapModule.forRoot(),
+    MDBBootstrapModule.forRoot()
   ],
   providers: [AuthService, ElasticsearchService],
   bootstrap: [AppComponent]
