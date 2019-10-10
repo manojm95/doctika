@@ -1,57 +1,56 @@
-import { Injectable } from '@angular/core';
-import { Client } from 'elasticsearch-browser';
-import * as elasticsearch from 'elasticsearch-browser';
- 
+import { Injectable } from "@angular/core";
+import { Client } from "elasticsearch-browser";
+import * as elasticsearch from "elasticsearch-browser";
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ElasticsearchService {
- 
   private client: Client;
- 
+
   constructor() {
     if (!this.client) {
       this._connect();
     }
   }
- 
+
   private connect() {
     this.client = new Client({
-      host: 'https://search-trlm-tika-poc-ikhcw3ie6kko6jzvot7nxwzdzq.us-east-1.es.amazonaws.com',
-      log: 'trace'
+      host: "https://mmmmm",
+      log: "trace"
     });
   }
- 
+
   private _connect() {
     this.client = new elasticsearch.Client({
-      host: 'https://search-trlm-tika-poc-ikhcw3ie6kko6jzvot7nxwzdzq.us-east-1.es.amazonaws.com',
-      log: 'trace'
+      host: "https://mmmm",
+      log: "trace"
     });
   }
- 
+
   isAvailable(): any {
     return this.client.ping({
       requestTimeout: Infinity,
-      body: 'hello grokonez!'
+      body: "hello grokonez!"
     });
   }
-  
+
   addToIndex(value: any): any {
     return this.client.create(value);
   }
 
   private queryalldocs = {
-    'query': {
-      'match_all': {}
+    query: {
+      match_all: {}
     }
   };
- 
+
   getAllDocuments(_index: any, _type: any): any {
     return this.client.search({
       index: _index,
       type: _type,
       body: this.queryalldocs,
-      filterPath: ['hits.hits._source']
+      filterPath: ["hits.hits._source"]
     });
   }
 
@@ -61,16 +60,14 @@ export class ElasticsearchService {
       type: _type,
       // Set to 1 minute because we are calling right back
       // (Elasticsearch keeps the search context open for another 1m)
-      scroll: '1m',
-      filterPath: ['hits.hits._source', 'hits.total', '_scroll_id'],
+      scroll: "1m",
+      filterPath: ["hits.hits._source", "hits.total", "_scroll_id"],
       body: {
-        'size': _size,
-        'query': {
-          'match_all': {}
+        size: _size,
+        query: {
+          match_all: {}
         },
-        'sort': [
-          { '_uid': { 'order': 'asc' } }
-        ]
+        sort: [{ _uid: { order: "asc" } }]
       }
     });
   }
@@ -78,43 +75,47 @@ export class ElasticsearchService {
   getNextPage(scroll_id: any): any {
     return this.client.scroll({
       scrollId: scroll_id,
-      scroll: '1m',
-      filterPath: ['hits.hits._source', 'hits.total', '_scroll_id']
+      scroll: "1m",
+      filterPath: ["hits.hits._source", "hits.total", "_scroll_id"]
     });
   }
 
-  fullTextSearch(_index: any, _type:any, _field:any, _queryText: any): any {
+  fullTextSearch(_index: any, _type: any, _field: any, _queryText: any): any {
     return this.client.search({
       index: _index,
       type: _type,
       // filterPath: ['hits.hits._source', 'hits.total', '_scroll_id'],
       body: {
-        'query': {
-          'match_phrase_prefix': {
-            [_field]: _queryText,
+        query: {
+          match_phrase_prefix: {
+            [_field]: _queryText
           }
         }
       },
       //explain: true,
-      '_source': ['name', 'empId','objectUrl']
+      _source: ["name", "empId", "objectUrl"]
     });
   }
 
-  
-  fullTextSearchContent(_index: any, _type:any, _field:any, _queryText: any): any {
+  fullTextSearchContent(
+    _index: any,
+    _type: any,
+    _field: any,
+    _queryText: any
+  ): any {
     return this.client.search({
       index: _index,
       type: _type,
       // filterPath: ['hits.hits._source', 'hits.total', '_scroll_id'],
       body: {
-        'query': {
-          'match': {
-            [_field]: _queryText,
+        query: {
+          match: {
+            [_field]: _queryText
           }
         }
       },
       //explain: true,
-      '_source': ['name', 'empId','objectUrl','content']
+      _source: ["name", "empId", "objectUrl", "content"]
     });
   }
 }
